@@ -105,6 +105,9 @@ def funcq29(cadeia, index):
 def funcq30(cadeia, index):
     return cadeia + ', erro("numero real mal formado")\n', index
 
+def funcq32(cadeia, index):
+    return ',, simb_virg\n', index
+
 estados_finais = {
     'q0' : funcq0,
     'q2' : funcq2,
@@ -128,7 +131,8 @@ estados_finais = {
     'q27' : funcq27,
     'q28' : funcq28,
     'q29' : funcq29,
-    'q30' : funcq30
+    'q30' : funcq30,
+    'q32' : funcq32
     }
 
 automato = {
@@ -147,7 +151,8 @@ automato = {
             '-' : 'q25',
             '*' : 'q27',
             '/' : 'q28',
-            '.' : 'q26'
+            '.' : 'q26',
+            ',' : 'q32'
             },
     'q1' : {},
     'q3' : {'=' : 'q4'},

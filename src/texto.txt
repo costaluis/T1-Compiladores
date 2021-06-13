@@ -1,8 +1,8 @@
 program p;
-var x@: real;
-begin
-    x:=1.e12;
-    while (x<3) do
-        x:=x+1;
-end.
->
+    {Delaração das Variáveis}
+    var x, y: real;
+    begin
+        x:=5.e;
+        for x:=1 to x do
+            x:=x*1/2;
+    end.

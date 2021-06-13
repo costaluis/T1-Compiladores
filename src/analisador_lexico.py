@@ -38,7 +38,7 @@ def funcq0(cadeia, index):
 
 def funcq2(cadeia, index):
     if(cadeia in tabela_simb_reservados):
-        return tabela_simb_reservados[cadeia] + '\n', index-1
+        return cadeia + ', ' + tabela_simb_reservados[cadeia] + '\n', index-1
     else:
         return cadeia + ', id\n', index-1
 
@@ -182,29 +182,43 @@ tabela_outros = {
     'q20' : 'q20'
 }
 
+estados_erro = ['q29', 'q30']
+estado_inicial = 'q0'
+estado_comentario = 'q20'
+
 index = 0
 output = ''
+cadeia = ''
+estado = ''
 
-while(True):
-    cadeia = ''
-    estado = 'q0'
+try:
     while(True):
-        c = texto[index]
-        index += 1
-        if(c not in automato[estado].keys()):
-            estado = tabela_outros[estado]
-            if(estado in estados_finais.keys()):
-                func_output, index = estados_finais[estado](cadeia, index)
-                output += func_output
-                break
-        else:
-            cadeia += c
-            estado = automato[estado][c]
-            if(estado in estados_finais.keys()):
-                func_output, index = estados_finais[estado](cadeia, index)
-                output += func_output
-                break
-            
+        cadeia = ''
+        estado = estado_inicial
+        while(True):
+            c = texto[index]
+            index += 1
+            if(c not in automato[estado].keys()):
+                estado = tabela_outros[estado]
+                if(estado in estados_finais.keys()):
+                    if(estado in estados_erro):   
+                        cadeia += c
+                    func_output, index = estados_finais[estado](cadeia, index)
+                    output += func_output
+                    break
+            else:
+                cadeia += c
+                estado = automato[estado][c]
+                if(estado in estados_finais.keys()):
+                    func_output, index = estados_finais[estado](cadeia, index)
+                    output += func_output
+                    break
+except IndexError:
+    if(estado == estado_comentario):
+        output += cadeia + ', erro("comentario nao finalizado")\n'
+    elif(estado != estado_inicial):
+        func_output, index = estados_finais[tabela_outros[estado]](cadeia, index)
+        output += func_output
+print(output)
 
-
-print(json.dumps(automato, indent=4))
+#print(json.dumps(automato, indent=4))

@@ -33,7 +33,77 @@ tabela_simb_reservados = {
     'procedure' : 'simb_procedure'
 }
 
-cadeia = ''
+def funcq0(cadeia, index):
+    return '', index
+
+def funcq2(cadeia, index):
+    if(cadeia in tabela_simb_reservados):
+        return tabela_simb_reservados[cadeia] + '\n', index-1
+    else:
+        return cadeia + ', id\n', index-1
+
+def funcq4(cadeia, index):
+    return ':=, simb_atrib\n', index
+
+def funcq5(cadeia, index):
+    return ':, simb_dp\n', index-1
+
+def funcq7(cadeia, index):
+    return '<=, simb_menor_igual\n', index
+
+def funcq8(cadeia, index):
+    return '<>, simb_dif\n', index
+
+def funcq9(cadeia, index):
+    return '<, simb_menor\n', index-1
+
+def funcq10(cadeia, index):
+    return '=, simb_igual\n', index
+
+def funcq12(cadeia, index):
+    return '>=, simb_maior_igual\n'
+
+def funcq13(cadeia, index):
+    return '>, simb_maior\n', index-1
+
+def funcq14(cadeia, index):
+    return ';, simb_pv\n', index
+
+def funcq16(cadeia, index):
+    return cadeia + ', num_int\n', index-1
+
+def funcq19(cadeia, index):
+    return cadeia + ', num_real\n', index-1
+
+def funcq21(cadeia, index):
+    return cadeia + ', comentario\n', index
+
+def funcq22(cadeia, index):
+    return '(, simb_apar\n', index
+
+def funcq23(cadeia, index):
+    return '), simb_fpar\n', index
+
+def funcq24(cadeia, index):
+    return '+, simb_mais\n', index
+
+def funcq25(cadeia, index):
+    return '-, simb_menos\n', index
+
+def funcq26(cadeia, index):
+    return '., simb_p\n', index
+
+def funcq27(cadeia, index):
+    return '*, simb_mult\n', index
+
+def funcq28(cadeia, index):
+    return '/, simb_div\n', index
+
+def funcq29(cadeia, index):
+    return cadeia + ', erro("caractere nao permitido")\n', index
+
+def funcq30(cadeia, index):
+    return cadeia + ', erro("numero real mal formado")\n', index
 
 estados_finais = {
     'q0' : funcq0,
@@ -113,15 +183,20 @@ tabela_outros = {
 }
 
 index = 0
-estado = 'q0'
 output = ''
 
 while(True):
+    cadeia = ''
     estado = 'q0'
     while(True):
         c = texto[index]
+        index += 1
         if(c not in automato[estado].keys()):
             estado = tabela_outros[estado]
+            if(estado in estados_finais.keys()):
+                func_output, index = estados_finais[estado](cadeia, index)
+                output += func_output
+                break
         else:
             cadeia += c
             estado = automato[estado][c]
@@ -129,11 +204,7 @@ while(True):
                 func_output, index = estados_finais[estado](cadeia, index)
                 output += func_output
                 break
-            index += 1
-
-
             
-
 
 
 print(json.dumps(automato, indent=4))

@@ -104,13 +104,13 @@
 			<output>retornar(cadeia, num_real); retroceder()</output>
 		</state>
 		<state id="20" name="q20">
-			<x>502.0</x>
-			<y>1154.0</y>
+			<x>512.0</x>
+			<y>1151.0</y>
 			<output/>
 		</state>
 		<state id="21" name="q21">
-			<x>860.0</x>
-			<y>1160.0</y>
+			<x>856.0</x>
+			<y>1154.0</y>
 			<output>retornar(cadeia, comentario)</output>
 		</state>
 		<state id="22" name="q22">
@@ -157,6 +157,11 @@
 			<x>860.0</x>
 			<y>1032.0</y>
 			<output>retornar(erro("Número real mal formado"))</output>
+		</state>
+		<state id="31" name="q31">
+			<x>856.0</x>
+			<y>1247.0</y>
+			<output>retornar(erro("Comentário não finalizado"))</output>
 		</state>
 		<!--The list of transitions.-->
 		<transition>
@@ -332,6 +337,12 @@
 			<to>29</to>
 			<read>outro</read>
 			<transout>retornar(erro("Caractere não permitido"))</transout>
+		</transition>
+		<transition>
+			<from>20</from>
+			<to>31</to>
+			<read>EOF</read>
+			<transout>retornar(erro("Comentário não finalizado"))</transout>
 		</transition>
 		<transition>
 			<from>18</from>

@@ -219,6 +219,9 @@ except IndexError:
     elif(estado != estado_inicial):
         func_output, index = estados_finais[tabela_outros[estado]](cadeia, index)
         output += func_output
-print(output)
+
+output_file = open("output.txt", 'w')
+output_file.write(output)
+output_file.close()
 
 #print(json.dumps(automato, indent=4))

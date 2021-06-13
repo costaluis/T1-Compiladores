@@ -1,0 +1,11 @@
+program, simb_program
+p, id
+;, simb_pv
+var, simb_var
+x, id
+@, erro("caractere nao permitido")
+:, simb_dp
+real, simb_tipo
+;, simb_pv
+begin, simb_begin
+{, erro("comentario nao finalizado")

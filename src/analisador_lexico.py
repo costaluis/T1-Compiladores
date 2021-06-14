@@ -3,7 +3,7 @@ import sys
 import string
 import json
 
-#Veriicação da entrada
+#Verificação da entrada
 if(len(sys.argv) > 2):
     print("Numero de argumentos invalido!")
     sys.exit(1)

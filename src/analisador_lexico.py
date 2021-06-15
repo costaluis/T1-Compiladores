@@ -287,7 +287,7 @@ except IndexError:
     #Se terminou em um estado de comentário:
     if(estado == estado_comentario):
         #Adiciona a mensagem de erro para comentário não finalizado
-        output += cadeia + ', erro("comentario nao finalizado")\n'
+        output += '{, erro("comentario nao finalizado")\n'
     #Se terminou durante uma iteração não finalizada do autômato
     elif(estado != estado_inicial):
         #Finaliza a transição e escreve a cadeia lida no texto de saída 

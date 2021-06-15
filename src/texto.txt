@@ -1,8 +1,7 @@
 program p;
-    {Delaração das Variáveis}
     var x, y: real;
     begin
-        x:=5.e;
+        x:={teste}5.e;
         for x:=1 to x do
             x:=x*1/2;
     end.

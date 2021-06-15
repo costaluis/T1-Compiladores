@@ -1,7 +1,6 @@
 program, simb_program
 p, id
 ;, simb_pv
-{}, comentario
 var, simb_var
 x, id
 ,, simb_virg

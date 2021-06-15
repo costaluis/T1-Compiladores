@@ -1,7 +1,6 @@
 #Import nas bibliotecas
 import sys
 import string
-import json
 
 #Verificação da entrada
 if(len(sys.argv) > 2):
@@ -37,10 +36,6 @@ tabela_simb_reservados = {
     'procedure' : 'simb_procedure',
     'to' : 'simb_to'
 }
-
-#Função de saída do estado q0
-def funcq0(cadeia, index):
-    return '', index
 
 #Função de saída do estado q2 com retroceder
 #Verifica se o id é um símbolo reservado
@@ -140,7 +135,6 @@ def funcq32(cadeia, index):
 
 #Tabela de estados finais
 estados_finais = {
-    'q0' : funcq0,
     'q2' : funcq2,
     'q4' : funcq4,
     'q5' : funcq5,
@@ -191,7 +185,7 @@ automato = {
     'q6' : {'=' : 'q7'},
     'q6' : {'>' : 'q8'},
     'q11' : {'=' : 'q12'}, 
-    'q20' : {'}' : 'q21'},
+    'q20' : {'}' : 'q0'},
     'q15' : {'.' : 'q17'},
     'q17' : {},
     'q18' : {}
@@ -274,10 +268,14 @@ try:
                     break
             #Se o autômato possui transição definida para o caractere:
             else:
-                #Adiciona o caractere lido à cadeia
-                cadeia += c
                 #Realiza a transição de estado
                 estado = automato[estado][c]
+
+                #Se continua no estado inicial ou no estado de comentário, leu um caractere ou cadeia inútil
+                if(estado != estado_inicial and estado != estado_comentario):
+                    #Adiciona o caractere lido à cadeia
+                    cadeia += c
+                
                 #Se o estado atual é um estaado final:
                 if(estado in estados_finais.keys()):
                     #Insere a cadeia lida no texto de saída e atualiza a cabeça de leitura

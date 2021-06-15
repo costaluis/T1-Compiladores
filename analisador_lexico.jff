@@ -108,11 +108,6 @@
 			<y>1153.0</y>
 			<output/>
 		</state>
-		<state id="21" name="q21">
-			<x>1010.0</x>
-			<y>1156.0</y>
-			<output>retornar(cadeia, comentario)</output>
-		</state>
 		<state id="22" name="q22">
 			<x>657.0</x>
 			<y>1359.0</y>
@@ -159,8 +154,8 @@
 			<output>retornar(erro("Número real mal formado"))</output>
 		</state>
 		<state id="31" name="q31">
-			<x>1010.0</x>
-			<y>1249.0</y>
+			<x>1014.0</x>
+			<y>1155.0</y>
 			<output>retornar(erro("Comentário não finalizado"))</output>
 		</state>
 		<state id="32" name="q32">
@@ -170,6 +165,12 @@
 		</state>
 		<!--The list of transitions.-->
 		<transition>
+			<from>0</from>
+			<to>15</to>
+			<read>0...9</read>
+			<transout/>
+		</transition>
+		<transition>
 			<from>18</from>
 			<to>18</to>
 			<read>0...9</read>
@@ -178,48 +179,6 @@
 		<transition>
 			<from>15</from>
 			<to>15</to>
-			<read>0...9</read>
-			<transout/>
-		</transition>
-		<transition>
-			<from>20</from>
-			<to>21</to>
-			<read>}</read>
-			<transout>retornar(cadeia, comentario)</transout>
-		</transition>
-		<transition>
-			<from>0</from>
-			<to>15</to>
-			<read>0...9</read>
-			<transout/>
-		</transition>
-		<transition>
-			<from>6</from>
-			<to>8</to>
-			<read>&gt;</read>
-			<transout>retornar('&lt;&gt;', simb_dif)</transout>
-		</transition>
-		<transition>
-			<from>17</from>
-			<to>30</to>
-			<read>outro</read>
-			<transout>retornar(erro("Número real mal formado"))</transout>
-		</transition>
-		<transition>
-			<from>18</from>
-			<to>19</to>
-			<read>outro</read>
-			<transout>retornar(cadeia, num_real); retroceder()</transout>
-		</transition>
-		<transition>
-			<from>0</from>
-			<to>28</to>
-			<read>/</read>
-			<transout>retornar('/', simb_div)</transout>
-		</transition>
-		<transition>
-			<from>17</from>
-			<to>18</to>
 			<read>0...9</read>
 			<transout/>
 		</transition>
@@ -230,76 +189,16 @@
 			<transout>retornar(',', simb_virg)</transout>
 		</transition>
 		<transition>
-			<from>3</from>
-			<to>5</to>
-			<read>outro</read>
-			<transout>retornar(':', simb_dp); retroceder()</transout>
-		</transition>
-		<transition>
-			<from>0</from>
-			<to>25</to>
-			<read>-</read>
-			<transout>retornar('-', simb_menos)</transout>
+			<from>20</from>
+			<to>21</to>
+			<read>}</read>
+			<transout/>
 		</transition>
 		<transition>
 			<from>0</from>
 			<to>10</to>
 			<read>=</read>
 			<transout>retornar('=', simb_igual)</transout>
-		</transition>
-		<transition>
-			<from>3</from>
-			<to>4</to>
-			<read>=</read>
-			<transout>retornar(':=', simb_atrib)</transout>
-		</transition>
-		<transition>
-			<from>1</from>
-			<to>1</to>
-			<read>letra | dígito</read>
-			<transout/>
-		</transition>
-		<transition>
-			<from>0</from>
-			<to>22</to>
-			<read>(</read>
-			<transout>retornar('(', simb_apar)</transout>
-		</transition>
-		<transition>
-			<from>0</from>
-			<to>14</to>
-			<read>;</read>
-			<transout>retornar(';', simb_pv)</transout>
-		</transition>
-		<transition>
-			<from>0</from>
-			<to>0</to>
-			<read>'' | \t | \n</read>
-			<transout/>
-		</transition>
-		<transition>
-			<from>6</from>
-			<to>9</to>
-			<read>outro</read>
-			<transout>retornar('&lt;', simb_menor); retroceder()</transout>
-		</transition>
-		<transition>
-			<from>20</from>
-			<to>20</to>
-			<read>outro</read>
-			<transout/>
-		</transition>
-		<transition>
-			<from>0</from>
-			<to>23</to>
-			<read>)</read>
-			<transout>retornar(')', simb_fpar)</transout>
-		</transition>
-		<transition>
-			<from>0</from>
-			<to>11</to>
-			<read>&gt;</read>
-			<transout/>
 		</transition>
 		<transition>
 			<from>0</from>
@@ -309,21 +208,45 @@
 		</transition>
 		<transition>
 			<from>0</from>
-			<to>1</to>
-			<read>letra</read>
-			<transout/>
+			<to>29</to>
+			<read>outro</read>
+			<transout>retornar(erro("Caractere não permitido"))</transout>
 		</transition>
 		<transition>
 			<from>0</from>
-			<to>20</to>
-			<read>{</read>
+			<to>3</to>
+			<read>:</read>
 			<transout/>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>4</to>
+			<read>=</read>
+			<transout>retornar(':=', simb_atrib)</transout>
+		</transition>
+		<transition>
+			<from>6</from>
+			<to>8</to>
+			<read>&gt;</read>
+			<transout>retornar('&lt;&gt;', simb_dif)</transout>
 		</transition>
 		<transition>
 			<from>11</from>
 			<to>13</to>
 			<read>outro</read>
 			<transout>retornar('&gt;', simb_maior); retroceder()</transout>
+		</transition>
+		<transition>
+			<from>17</from>
+			<to>18</to>
+			<read>0...9</read>
+			<transout/>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>1</to>
+			<read>letra | dígito</read>
+			<transout/>
 		</transition>
 		<transition>
 			<from>15</from>
@@ -333,15 +256,45 @@
 		</transition>
 		<transition>
 			<from>0</from>
-			<to>27</to>
-			<read>*</read>
-			<transout>retornar('*', simb_mult)</transout>
+			<to>0</to>
+			<read>'' | \t | \n</read>
+			<transout/>
+		</transition>
+		<transition>
+			<from>20</from>
+			<to>20</to>
+			<read>outro</read>
+			<transout/>
 		</transition>
 		<transition>
 			<from>0</from>
 			<to>24</to>
 			<read>+</read>
 			<transout>retornar('+', simb_mais)</transout>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>2</to>
+			<read>outro</read>
+			<transout>retornar(busca_tabela(cadeia)); retroceder()</transout>
+		</transition>
+		<transition>
+			<from>17</from>
+			<to>30</to>
+			<read>outro</read>
+			<transout>retornar(erro("Número real mal formado"))</transout>
+		</transition>
+		<transition>
+			<from>6</from>
+			<to>9</to>
+			<read>outro</read>
+			<transout>retornar('&lt;', simb_menor); retroceder()</transout>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>1</to>
+			<read>letra</read>
+			<transout/>
 		</transition>
 		<transition>
 			<from>11</from>
@@ -356,16 +309,46 @@
 			<transout>retornar('&lt;=', simb_menor_igual)</transout>
 		</transition>
 		<transition>
-			<from>20</from>
-			<to>31</to>
-			<read>EOF</read>
-			<transout>retornar(erro("Comentário não finalizado"))</transout>
+			<from>0</from>
+			<to>6</to>
+			<read>&lt;</read>
+			<transout/>
 		</transition>
 		<transition>
-			<from>1</from>
-			<to>2</to>
+			<from>0</from>
+			<to>25</to>
+			<read>-</read>
+			<transout>retornar('-', simb_menos)</transout>
+		</transition>
+		<transition>
+			<from>18</from>
+			<to>19</to>
 			<read>outro</read>
-			<transout>retornar(busca_tabela(cadeia)); retroceder()</transout>
+			<transout>retornar(cadeia, num_real); retroceder()</transout>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>23</to>
+			<read>)</read>
+			<transout>retornar(')', simb_fpar)</transout>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>22</to>
+			<read>(</read>
+			<transout>retornar('(', simb_apar)</transout>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>11</to>
+			<read>&gt;</read>
+			<transout/>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>5</to>
+			<read>outro</read>
+			<transout>retornar(':', simb_dp); retroceder()</transout>
 		</transition>
 		<transition>
 			<from>15</from>
@@ -375,20 +358,38 @@
 		</transition>
 		<transition>
 			<from>0</from>
-			<to>6</to>
-			<read>&lt;</read>
+			<to>28</to>
+			<read>/</read>
+			<transout>retornar('/', simb_div)</transout>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>27</to>
+			<read>*</read>
+			<transout>retornar('*', simb_mult)</transout>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>20</to>
+			<read>{</read>
 			<transout/>
 		</transition>
 		<transition>
 			<from>0</from>
-			<to>29</to>
-			<read>outro</read>
-			<transout>retornar(erro("Caractere não permitido"))</transout>
+			<to>14</to>
+			<read>;</read>
+			<transout>retornar(';', simb_pv)</transout>
 		</transition>
 		<transition>
-			<from>0</from>
-			<to>3</to>
-			<read>:</read>
+			<from>20</from>
+			<to>31</to>
+			<read>EOF</read>
+			<transout>retornar(erro("Comentário não finalizado"))</transout>
+		</transition>
+		<transition>
+			<from>20</from>
+			<to>0</to>
+			<read>}</read>
 			<transout/>
 		</transition>
 	</automaton>
